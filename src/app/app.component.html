@@ -1,0 +1,37 @@
+<main class="flex flex-col items-center justify-center p-4">
+  <section *ngIf="selectSectionService.instruments"
+           class="selection-section flex items-center justify-between gap-4 mb-4">
+    <app-select></app-select>
+    <app-button (click)="subscribeToInstrument()"></app-button>
+  </section>
+
+  <section *ngIf="wssService.selectedInstrument as selectedInstrument;else noSelectedInstrument"
+           class="selected-instrument-section p-4 flex gap-4 justify-between items-center">
+    <div class="flex flex-col justify-center items-center">
+      <label>Symbol</label>
+      {{ selectSectionService.instrumentControl.value?.description }}
+    </div>
+    <div class="flex flex-col justify-center items-center">
+      <label>Price</label>
+      {{ selectedInstrument.data.price }}
+    </div>
+    <div class="flex flex-col justify-center items-center">
+      <label>Time</label>
+      {{ selectedInstrument.data.timestamp | date : 'mediumTime' }}
+    </div>
+  </section>
+
+  <ng-template #noSelectedInstrument>
+    <section class="selected-instrument-section p-4">
+      Select Instrument
+    </section>
+  </ng-template>
+
+
+  <section *ngIf="selectSectionService.bars" class="chart-section">
+    <app-historical-chart></app-historical-chart>
+  </section>
+
+
+</main>
+
