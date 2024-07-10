@@ -1,3 +1,3 @@
 to run demo:
-- in root folder run npm run start
-- go to server folder and run same command
+- run npm install in root and /server folders 
+- run npm run start in both same folders
